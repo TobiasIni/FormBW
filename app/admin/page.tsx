@@ -204,7 +204,7 @@ export default function AdminPanel() {
             </Table>
 
             {submissions.length === 0 && (
-              <div className="text-center py-8 text-gray-500">No hay participaciones aún</div>
+              <div className="text-center py-8 text-gray-500">No hay participaciones aún!</div>
             )}
           </CardContent>
         </Card>
