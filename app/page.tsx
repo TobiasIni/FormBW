@@ -553,7 +553,7 @@ export default function QuizApp() {
                     setCompany("")
                     setTotalScore(0)
                   }}
-                  className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
+                  className="w-full bg-colorAcento hover:bg-colorAcento/90 text-white font-semibold py-3 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
                 >
                   Realizar Nueva Evaluación
                   <ArrowRight className="w-4 h-4 ml-2" />
