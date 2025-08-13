@@ -192,35 +192,75 @@ export default function QuizApp() {
     }
   }
 
+  const getBackgroundImage = (score: number) => {
+    var icon=""
+    if (score <= 7) {
+      return "/fondoDigital.png"
+    } else if (score > 7 && score <= 12) {
+      return "/fondoDigital.png"
+    } else {
+      return "/fondoDigital.png"
+    }
+  }
+
+  const getIcon = (score: number) => {
+    if (score <= 7) {
+      return "/iconTradicional.png"
+    } else if (score > 7 && score <= 12) {
+      return "/iconEvolucion.png"
+    } else {
+      return "/iconDigital.png"
+    }
+  }
+
   if (currentScreen === "presentation") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
         {/* Background effects */}
-        <video src="/videoForm.mp4" autoPlay loop muted className="absolute inset-0 w-full h-full object-cover" />
+        <video 
+          key="background-video"
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          onLoadedData={(e) => {
+            console.log('Video loaded successfully');
+            (e.target as HTMLVideoElement).play();
+          }}
+          onError={(e) => console.error('Video error:', e)}
+          onEnded={(e) => {
+            console.log('Video ended, restarting...');
+            const video = e.target as HTMLVideoElement;
+            video.currentTime = 0;
+            video.play();
+          }}
+          onPause={(e) => {
+            console.log('Video paused, resuming...');
+            (e.target as HTMLVideoElement).play();
+          }}
+        >
+          <source src="/videoForm.mp4?v=2" type="video/mp4" />
+          <source src="/videoForm.mp4" type="video/mp4" />
+          Su navegador no soporta el elemento video.
+        </video>
         
-        <div className="relative z-10 w-full max-w-4xl mx-auto">
-          <div className="text-center space-y-8">
+        <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center">
+          <div className="text-center space-y-8 flex flex-col items-center justify-center">
             {/* Logo/Icon */}
-            <div className="flex justify-center">
-              <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-tr from-blue-400 to-indigo-600 rounded-2xl flex items-center justify-center shadow-2xl">
-                  <BarChart3 className="w-10 h-10 text-white" />
-                </div>
+            <div className="flex justify-center w-full">
+              <div className="relative flex justify-center">
+               <img src="/logos.png" alt="logo" className="w-auto h-32 max-w-md object-contain" />
                 <div className="absolute -top-2 -right-2">
                 </div>
               </div>
             </div>
 
             {/* Main title */}
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-white to-indigo-400 bg-clip-text text-transparent">
-                BW
-              </h1>
-              <h2 className="text-2xl md:text-3xl font-semibold text-white">
-                Conoce tu plataforma ideal
-              </h2>
+            <div className="space-y-2">
               <p className="text-lg text-blue-200 max-w-2xl mx-auto leading-relaxed">
-                Descubrí cual es la plataforma que más se adapta mejor a tu empresa
+              Descubrí la plataforma que mejor se adapta a tu empresa
               </p>
             </div>
 
@@ -231,7 +271,7 @@ export default function QuizApp() {
             <div className="mt-12">
               <Button 
                 onClick={() => setCurrentScreen("welcome")}
-                className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold px-8 py-4 rounded-xl text-lg shadow-2xl transform hover:scale-105 transition-all duration-300"
+                className="bg-colorAcento hover:bg-colorAcento/90 text-white font-semibold px-8 py-4 rounded-xl text-lg shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
                 Conoce tu plataforma ideal
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -245,18 +285,18 @@ export default function QuizApp() {
 
   if (currentScreen === "welcome") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md shadow-xl border-0">
-          <CardHeader className="text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-lg">
+             <div className="min-h-screen bg-fondo-digital flex items-center justify-center p-4">
+        <Card className="w-full max-w-md shadow-xl border-0 bg-white">
+          <CardHeader className="text-center bg-colorAcento text-white rounded-t-lg">
             <CardTitle className="text-2xl font-bold">¡Formulario BW!</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 p-8">
-            <div className="text-center text-gray-600">
+            <div className="text-center text-colorTexto">
               <p className="text-lg">Descubrí cuál es la plataforma que más se adapta a vos</p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-700 font-medium">Correo Electrónico</Label>
+              <Label htmlFor="email" className="text-colorTexto font-medium">Correo Electrónico</Label>
               <Input
                 id="email"
                 type="email"
@@ -269,7 +309,7 @@ export default function QuizApp() {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-gray-700 font-medium">Nombre</Label>
+              <Label htmlFor="name" className="text-colorTexto font-medium">Nombre</Label>
               <Input
                 id="name"
                 type="text"
@@ -282,7 +322,7 @@ export default function QuizApp() {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="lastname" className="text-gray-700 font-medium">Apellido</Label>
+              <Label htmlFor="lastname" className="text-colorTexto font-medium">Apellido</Label>
               <Input
                 id="lastname"
                 type="text"
@@ -295,7 +335,7 @@ export default function QuizApp() {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="company" className="text-gray-700 font-medium">Empresa</Label>
+              <Label htmlFor="company" className="text-colorTexto font-medium">Empresa</Label>
               <Input
                 id="company"
                 type="text"
@@ -309,7 +349,7 @@ export default function QuizApp() {
 
             <Button 
               onClick={handleStartQuiz} 
-              className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 py-3 rounded-lg font-semibold" 
+              className="w-full bg-colorAcento text-white hover:bg-colorAcento/90 py-3 rounded-lg font-semibold" 
               disabled={!email.trim() || !name.trim() || !lastname.trim() || !company.trim()}
             >
               Comenzar Quiz
@@ -356,7 +396,7 @@ export default function QuizApp() {
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                className="bg-colorAcento h-2 rounded-full transition-all duration-300"
                 style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}
               />
             </div>
@@ -370,7 +410,11 @@ export default function QuizApp() {
             >
               {currentQuestion.options.map((option, index) => (
                 <div key={index} className="flex items-center space-x-2 p-3 rounded-lg hover:bg-gray-50">
-                  <RadioGroupItem value={index.toString()} id={`option-${index}`} />
+                  <RadioGroupItem 
+                    value={index.toString()} 
+                    id={`option-${index}`} 
+                    className="border-colorAcento data-[state=checked]:border-colorAcento data-[state=checked]:text-colorAcento"
+                  />
                   <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
                     {option.text}
                   </Label>
@@ -378,7 +422,7 @@ export default function QuizApp() {
               ))}
             </RadioGroup>
 
-            <Button onClick={handleNextQuestion} disabled={currentAnswer === undefined || loading} className="w-full">
+            <Button onClick={handleNextQuestion} disabled={currentAnswer === undefined || loading} className="w-full bg-colorAcento text-white hover:bg-colorAcento/90">
               {loading
                 ? "Enviando..."
                 : currentQuestionIndex === questions.length - 1
@@ -396,13 +440,19 @@ export default function QuizApp() {
     const result = getResultMessage(totalScore)
     const maxScore = questions.length * 3
     const percentage = Math.round((totalScore / maxScore) * 100)
-
+    const backgroundImage = getBackgroundImage(totalScore)
+    const icon = getIcon(totalScore)
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4 relative overflow-hidden">
-        {/* Background effects */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-indigo-600/20" />
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
+      <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+        {/* Background image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+          }}
+        />
+        {/* Dark overlay for better readability */}
+        <div className="absolute inset-0 bg-black/40" />
         
         <div className="relative z-10 w-full max-w-2xl mx-auto">
           <Card className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl">
@@ -413,7 +463,7 @@ export default function QuizApp() {
                   <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-tr from-blue-400 to-indigo-600 rounded-full blur opacity-60 animate-pulse"></div>
                     <div className="relative bg-gradient-to-tr from-blue-400 to-indigo-600 rounded-full p-6">
-                      {result?.icon}
+                      <img src={icon} alt="icon" className="w-16 h-16" />
                     </div>
                   </div>
                 </div>
@@ -442,7 +492,7 @@ export default function QuizApp() {
                       cy="72"
                       r="60"
                       fill="none"
-                      stroke="rgba(255,255,255,0.1)"
+                      stroke="rgba(255, 255, 255, 0.1)"
                       strokeWidth="8"
                     />
                     <circle

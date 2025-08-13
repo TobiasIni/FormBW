@@ -4,9 +4,12 @@ import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'BW Formulario',
+  description: 'BW Formulario',
+  generator: 'BW Formulario',
+  icons: {
+    icon: '/favicon.png',
+  },
 }
 
 export default function RootLayout({

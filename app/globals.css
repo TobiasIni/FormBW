@@ -88,3 +88,37 @@
     @apply bg-background text-foreground;
   }
 }
+
+.colorTexto{
+  color: #010521 !important;
+}
+
+.colorAcento{
+  color: #9966f5 !important;
+}
+
+.bg-colorAcento{
+  background-color: #9966f5 !important;
+}
+
+.border-colorAcento{
+  border-color: #9966f5 !important;
+}
+
+.hover\:bg-colorAcento\/90:hover{
+  background-color: rgba(153, 102, 245, 0.9) !important;
+}
+
+/* Estilo para el círculo interior del radio button */
+.border-colorAcento[data-state="checked"] .lucide-circle {
+  color: #9966f5 !important;
+  fill: #9966f5 !important;
+}
+
+/* Clase para imagen de fondo */
+.bg-fondo-digital {
+  background-image: url('/fondoDigital.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
