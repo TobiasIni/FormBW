@@ -195,9 +195,9 @@ export default function QuizApp() {
   const getBackgroundImage = (score: number) => {
     var icon=""
     if (score <= 7) {
-      return "/fondoDigital.png"
+      return "/fondoTradicional.png"
     } else if (score > 7 && score <= 12) {
-      return "/fondoDigital.png"
+      return "/fondoEvolucion.png"
     } else {
       return "/fondoDigital.png"
     }
@@ -260,7 +260,7 @@ export default function QuizApp() {
             {/* Main title */}
             <div className="space-y-2">
               <p className="text-lg text-blue-200 max-w-2xl mx-auto leading-relaxed">
-              Descubrí la plataforma que mejor se adapta a tu empresa
+              Descubrí el nivel de digitalización de tu empresa
               </p>
             </div>
 
@@ -273,7 +273,7 @@ export default function QuizApp() {
                 onClick={() => setCurrentScreen("welcome")}
                 className="bg-colorAcento hover:bg-colorAcento/90 text-white font-semibold px-8 py-4 rounded-xl text-lg shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
-                Conoce tu plataforma ideal
+                Comenza el mini sondeo
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </div>
@@ -291,16 +291,13 @@ export default function QuizApp() {
             <CardTitle className="text-2xl font-bold">¡Formulario BW!</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 p-8">
-            <div className="text-center text-colorTexto">
-              <p className="text-lg">Descubrí cuál es la plataforma que más se adapta a vos</p>
-            </div>
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-colorTexto font-medium">Correo Electrónico</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="tu@email.com"
+                placeholder=""
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -313,7 +310,7 @@ export default function QuizApp() {
               <Input
                 id="name"
                 type="text"
-                placeholder="Juan"
+                placeholder=""
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -326,7 +323,7 @@ export default function QuizApp() {
               <Input
                 id="lastname"
                 type="text"
-                placeholder="Perez"
+                placeholder=""
                 value={lastname}
                 onChange={(e) => setLastname(e.target.value)}
                 required
@@ -339,7 +336,7 @@ export default function QuizApp() {
               <Input
                 id="company"
                 type="text"
-                placeholder="Workvivo"
+                placeholder=""
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
                 required
