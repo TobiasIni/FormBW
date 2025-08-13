@@ -460,7 +460,7 @@ export default function QuizApp() {
                   <div className="relative">
                       <div className="absolute inset-0 bg-transparent rounded-full blur opacity-60 animate-pulse"></div>
                       <div className="relative bg-transparent rounded-full p-6">
-                        <img src={icon} alt="icon" className="w-16 h-16" />
+                        <img src={icon} alt="icon" className="w-32 h-32" />
                     </div>
                   </div>
                 </div>
