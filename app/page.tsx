@@ -449,7 +449,6 @@ export default function QuizApp() {
           }}
         />
         {/* Dark overlay for better readability */}
-        <div className="absolute inset-0 bg-black/40" />
         
         <div className="relative z-10 w-full max-w-2xl mx-auto">
           <Card className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl">
