@@ -10,10 +10,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { supabase, type Question } from "@/lib/supabase"
 import { ChevronRight, Trophy, Star, Award, Target, Sparkles, Users, BarChart3, ArrowRight, CheckCircle } from "lucide-react"
 
-type Screen = "presentation" | "welcome" | "quiz" | "result"
+type Screen = "welcome" | "quiz" | "result"
 
 export default function QuizApp() {
-  const [currentScreen, setCurrentScreen] = useState<Screen>("presentation")
+  const [currentScreen, setCurrentScreen] = useState<Screen>("welcome")
   const [questions, setQuestions] = useState<Question[]>([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [email, setEmail] = useState("")
@@ -30,63 +30,7 @@ export default function QuizApp() {
   const [totalScore, setTotalScore] = useState(0)
   const [loading, setLoading] = useState(false)
 
-  const defaultQuestions: Question[] = [
-    {
-      id: 1,
-      question: "¿Cuál es tu nivel de experiencia en programación?",
-      options: [
-        { text: "Principiante", score: 1 },
-        { text: "Intermedio", score: 2 },
-        { text: "Avanzado", score: 3 },
-        { text: "Experto", score: 4 },
-      ],
-      created_at: new Date().toISOString(),
-    },
-    {
-      id: 2,
-      question: "¿Qué lenguaje de programación prefieres?",
-      options: [
-        { text: "JavaScript", score: 3 },
-        { text: "Python", score: 2 },
-        { text: "Java", score: 1 },
-        { text: "C++", score: 4 },
-      ],
-      created_at: new Date().toISOString(),
-    },
-    {
-      id: 3,
-      question: "¿Con qué frecuencia programas?",
-      options: [
-        { text: "Diariamente", score: 4 },
-        { text: "Varias veces por semana", score: 3 },
-        { text: "Una vez por semana", score: 2 },
-        { text: "Ocasionalmente", score: 1 },
-      ],
-      created_at: new Date().toISOString(),
-    },
-    {
-      id: 4,
-      question: "¿Cuál es tu área de interés principal?",
-      options: [
-        { text: "Desarrollo Web", score: 2 },
-        { text: "Inteligencia Artificial", score: 4 },
-        { text: "Desarrollo Móvil", score: 3 },
-        { text: "Ciencia de Datos", score: 3 },
-      ],
-      created_at: new Date().toISOString(),
-    },
-    {
-      id: 5,
-      question: "¿Trabajas en equipo o individualmente?",
-      options: [
-        { text: "Siempre en equipo", score: 3 },
-        { text: "Mayormente en equipo", score: 2 },
-        { text: "Mayormente individual", score: 1 },
-        { text: "Siempre individual", score: 1 },
-      ],
-      created_at: new Date().toISOString(),
-    },
-  ]
+  
 
   useEffect(() => {
     fetchQuestions()
@@ -100,18 +44,15 @@ export default function QuizApp() {
       if (error) {
         console.error("Error fetching questions:", error)
         console.log("Usando preguntas por defecto...")
-        setQuestions(defaultQuestions)
       } else if (data && data.length > 0) {
         console.log("Preguntas cargadas desde Supabase:", data.length)
         setQuestions(data)
       } else {
         console.log("No hay preguntas en la base de datos, usando preguntas por defecto...")
-        setQuestions(defaultQuestions)
       }
     } catch (err) {
       console.error("Error de conexión:", err)
       console.log("Usando preguntas por defecto...")
-      setQuestions(defaultQuestions)
     }
   }
 
@@ -168,25 +109,40 @@ export default function QuizApp() {
 
   const getResultMessage = (score: number) => {
 
-    if (score <= 7) {
+    if (score <= 9) {
       return {
-        title: "Tradicional",
-        message: " Tu comunicación interna aún se apoya en canales tradicionales, sin integración ni personalización. ¡Es momento de dar un salto hacia la digitalización! Workvivo puede ayudarte a empezar.",
-        icon: <Mail className="w-16 h-16 text-white" />,
+        title: "Paquete Visual",
+        message: "Foco en Diseño gráfico y audiovisual + piezas rápidas de alto impacto.",
+        image: "/paqueteVisual.png",
         color: "text-white",
       }
-    } else if (score > 7 && score <= 12) {
+    } else if (score > 9 && score <= 13) {
       return {
-        title: "En evolución",
+        title: "Paquete Líderes",
         message: "Ya están transitando el camino de la transformación digital. Tienen herramientas útiles, pero aún hay oportunidades para mejorar integración, IA y medición integrales de la matriz de Workvivo.",
-        icon: <BarChart3 className="w-10 h-10 text-white" />,
+        image: "/paqueteLideres.png",
         color: "text-yellow-600",
       }
-    } else if (score > 12) {
+    } else if (score > 13 && score <= 17) {
       return {
-        title: "Digital Champion",
-        message: "¡Felicitaciones! Están a la vanguardia en CI digital. Integración, personalización y medición inteligente son parte de su día a día. Podrían ser caso de éxito ¿Te gustaría sumarte a un evento con nosotros?",
-        icon: <Smartphone className="w-16 h-16 text-green-500" />,
+        title: "Paquete Tech",
+        message: "Foco en Implementación de Plataformas + Integraciones de Sistemas.",
+        image: "/paqueteTech.png",
+        color: "text-green-600",
+      }
+    } else if (score > 17 && score <= 21) {
+      return {
+        title: "Paquete Tech",
+        message: "Foco en Implementación de Plataformas + Integraciones de Sistemas.",
+        image: "/paqueteTech.png",
+        color: "text-green-600",
+      }
+    }
+    else if (score > 21 && score <= 25) {
+      return {
+        title: "Paquete Futuro",
+        message: "Foco en Consultoría estratégica + Desarrollo de Asistentes GPT + roadmap integral.",
+        image: "/paqueteFuturo.png",
         color: "text-green-600",
       }
     }
@@ -195,60 +151,23 @@ export default function QuizApp() {
   const getBackgroundImage = (score: number) => {
     var icon=""
     if (score <= 7) {
-      return "/fondoTradicional.png"
+      return "/fondo.png"
     } else if (score > 7 && score <= 12) {
-      return "/fondoEvolucion.png"
+      return "/fondo.png"
     } else {
-      return "/fondoDigital.png"
+      return "/fondo.png"
     }
   }
 
-  const getIcon = (score: number) => {
-    if (score <= 7) {
-      return "/iconTradicional.png"
-    } else if (score > 7 && score <= 12) {
-      return "/iconEvolucion.png"
-    } else {
-      return "/iconDigital.png"
-    }
-  }
+  /*
 
   if (currentScreen === "presentation") {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
-        {/* Background effects */}
-        <video 
-          key="background-video"
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 w-full h-full object-cover z-0"
-          onLoadedData={(e) => {
-            console.log('Video loaded successfully');
-            (e.target as HTMLVideoElement).play();
-          }}
-          onError={(e) => console.error('Video error:', e)}
-          onEnded={(e) => {
-            console.log('Video ended, restarting...');
-            const video = e.target as HTMLVideoElement;
-            video.currentTime = 0;
-            video.play();
-          }}
-          onPause={(e) => {
-            console.log('Video paused, resuming...');
-            (e.target as HTMLVideoElement).play();
-          }}
-        >
-          <source src="/videoForm.mp4?v=2" type="video/mp4" />
-          <source src="/videoForm.mp4" type="video/mp4" />
-          Su navegador no soporta el elemento video.
-        </video>
+      <div className="min-h-screen bg-fondo flex items-center justify-center p-4 relative overflow-hidden">
         
         <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center">
           <div className="text-center space-y-8 flex flex-col items-center justify-center">
-            {/* Logo/Icon */}
+
             <div className="flex justify-center w-full">
               <div className="relative flex justify-center">
                <img src="/logos.png" alt="logo" className="w-auto h-32 max-w-md object-contain" />
@@ -257,17 +176,16 @@ export default function QuizApp() {
               </div>
             </div>
 
-            {/* Main title */}
+
             <div className="space-y-2">
-              <p className="text-lg text-blue-200 max-w-2xl mx-auto leading-relaxed">
-              Descubrí el nivel de digitalización de tu empresa
-              </p>
+              <h1 className="text-lg text-blue-200 max-w-2xl mx-auto leading-relaxed"> 
+              Sondeo Plan de CI 2026 
+              </h1>
             </div>
 
-            {/* Features */}
            
 
-            {/* CTA Button */}
+
             <div className="mt-12">
               <Button 
                 onClick={() => setCurrentScreen("welcome")}
@@ -282,13 +200,15 @@ export default function QuizApp() {
       </div>
     )
   }
+     */
+
 
   if (currentScreen === "welcome") {
     return (
-             <div className="min-h-screen bg-fondo-digital flex items-center justify-center p-4">
+             <div className="min-h-screen bg-fondo flex items-center justify-center p-4">
         <Card className="w-full max-w-md shadow-xl border-0 bg-white">
           <CardHeader className="text-center bg-colorAcento text-white rounded-t-lg">
-            <CardTitle className="text-2xl font-bold">¡Formulario BW!</CardTitle>
+            <CardTitle className="text-2xl font-bold">Sondeo Plan de CI 2026</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 p-8">
 
@@ -364,7 +284,7 @@ export default function QuizApp() {
 
     if (!currentQuestion && questions.length === 0) {
       return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-fondo flex items-center justify-center p-4">
           <Card className="w-full max-w-md">
             <CardContent className="text-center py-8">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
@@ -380,7 +300,7 @@ export default function QuizApp() {
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-fondo flex items-center justify-center p-4">
         <Card className="w-full max-w-2xl">
           <CardHeader>
             <div className="flex justify-between items-center">
@@ -435,10 +355,9 @@ export default function QuizApp() {
 
   if (currentScreen === "result") {
     const result = getResultMessage(totalScore)
-    const maxScore = questions.length * 3
+    const maxScore = questions.length * 5
     const percentage = Math.round((totalScore / maxScore) * 100)
     const backgroundImage = getBackgroundImage(totalScore)
-    const icon = getIcon(totalScore)
     return (
       <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
         {/* Background image */}
@@ -459,12 +378,9 @@ export default function QuizApp() {
                   <div className="relative">
                       <div className="absolute inset-0 bg-transparent rounded-full blur opacity-60 animate-pulse"></div>
                       <div className="relative bg-transparent rounded-full p-6">
-                        <img src={icon} alt="icon" className="w-32 h-32" />
+                        <img src={result?.image} alt="paquete" className="w-60 h-60" />
                     </div>
                   </div>
-                </div>
-                <div className="absolute -top-4 -right-8">
-                  <CheckCircle className="w-8 h-8 text-green-400 animate-bounce" />
                 </div>
               </div>
 
@@ -543,7 +459,7 @@ export default function QuizApp() {
               <div className="space-y-4">
                 <Button
                   onClick={() => {
-                    setCurrentScreen("presentation")
+                    setCurrentScreen("welcome")
                     setCurrentQuestionIndex(0)
                     setAnswers([])
                     setEmail("")
