@@ -113,6 +113,7 @@ export default function QuizApp() {
       return {
         title: "Paquete Visual",
         message: "Foco en Diseño gráfico y audiovisual + piezas rápidas de alto impacto.",
+        subtitle: "Tus respuestas muestran que hoy tu prioridad está en lo táctico y concreto: piezas que lleguen, campañas que impacten y mensajes que sean recordados. El foco está en hacer visible y atractivo lo que ya existe, más que en rediseñar todo el modelo de comunicación. No hay un único camino correcto, y todas las soluciones de BW pueden customizarse o adaptarse más allá de este sondeo. ",
         image: "/paqueteVisual.png",
         color: "text-white",
       }
@@ -120,20 +121,23 @@ export default function QuizApp() {
       return {
         title: "Paquete Líderes",
         message: "Ya están transitando el camino de la transformación digital. Tienen herramientas útiles, pero aún hay oportunidades para mejorar integración, IA y medición integrales de la matriz de Workvivo.",
+        subtitle: "Tus respuestas reflejan que el gran desafío de tu CI está en las personas que comunican, sobre todo en líderes y equipos. Aparece la importancia de la cercanía, la claridad y la formación en habilidades. No hay un único camino correcto, y todas las soluciones de BW pueden customizarse o adaptarse más allá de este sondeo.",
         image: "/paqueteLideres.png",
         color: "text-yellow-600",
       }
     } else if (score > 13 && score <= 17) {
       return {
-        title: "Paquete Tech",
-        message: "Foco en Implementación de Plataformas + Integraciones de Sistemas.",
-        image: "/paqueteTech.png",
+        title: "Paquete Estrategia",
+        message: "Foco en Diagnóstico Integral de CI + Plan Trimestral de CI.",
+        subtitle: "Tus respuestas muestran que estás pensando la CI como algo que tiene que alinearse al negocio y no quedar aislada. Buscás visión integral, diagnóstico y planificación, más que solo ejecutar acciones aisladas. No hay un único camino correcto, y todas las soluciones de BW pueden customizarse o adaptarse más allá de este sondeo.",
+        image: "/paqueteEstrategia.png",
         color: "text-green-600",
       }
     } else if (score > 17 && score <= 21) {
       return {
         title: "Paquete Tech",
         message: "Foco en Implementación de Plataformas + Integraciones de Sistemas.",
+        subtitle: "Tus respuestas reflejan que la tecnología ya es el gran motor de tu CI: querés ir más allá de lo visual y usar plataformas colaborativas, integraciones y soluciones que te permitan escalar, amplificar y automatizar. No hay un único camino correcto, y todas las soluciones de BW pueden customizarse o adaptarse más allá de este sondeo.",
         image: "/paqueteTech.png",
         color: "text-green-600",
       }
@@ -142,6 +146,7 @@ export default function QuizApp() {
       return {
         title: "Paquete Futuro",
         message: "Foco en Consultoría estratégica + Desarrollo de Asistentes GPT + roadmap integral.",
+        subtitle: "Tus respuestas demuestran una visión transformadora: entendés la CI como palanca estratégica del negocio y la cultura. No te alcanza con piezas o plataformas: querés anticipar tendencias, integrar IA y liderar el cambio cultural. No hay un único camino correcto, y todas las soluciones de BW pueden customizarse o adaptarse más allá de este sondeo.",
         image: "/paqueteFuturo.png",
         color: "text-green-600",
       }
@@ -205,7 +210,12 @@ export default function QuizApp() {
 
   if (currentScreen === "welcome") {
     return (
-             <div className="min-h-screen bg-fondo flex items-center justify-center p-4">
+      <div className="min-h-screen bg-fondo flex flex-col items-center justify-center p-4">
+        {/* Logo centrado arriba del formulario */}
+        <div className="flex justify-center mb-8">
+          <img src="/logo-bw.png" alt="logo" className="w-40 h-40 max-w-xs object-contain"/>
+        </div>
+        
         <Card className="w-full max-w-md shadow-xl border-0 bg-white">
           <CardHeader className="text-center bg-colorAcento text-white rounded-t-lg">
             <CardTitle className="text-2xl font-bold">Sondeo Plan de CI 2026</CardTitle>
@@ -277,7 +287,6 @@ export default function QuizApp() {
       </div>
     )
   }
-
   if (currentScreen === "quiz") {
     const currentQuestion = questions[currentQuestionIndex]
     const currentAnswer = answers[currentQuestionIndex]
@@ -391,6 +400,9 @@ export default function QuizApp() {
                 </h1>
                 <p className="text-xl text-blue-200 leading-relaxed max-w-lg mx-auto">
                   {result?.message}
+                </p>
+                <p className="text-xl text-blue-200 leading-relaxed max-w-lg mx-auto">
+                  {result?.subtitle}
                 </p>
               </div>
 
