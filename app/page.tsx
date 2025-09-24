@@ -406,7 +406,7 @@ export default function QuizApp() {
                 </p>
               </div>
 
-              {/* Score display with circular progress */}
+              {/* Score display with circular progress ww*/}
               <div className="space-y-6">
                 <div className="relative mx-auto w-40 h-40">
                   {/* Circular progress background */}
